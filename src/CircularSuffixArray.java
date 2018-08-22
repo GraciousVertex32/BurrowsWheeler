@@ -1,17 +1,21 @@
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 public class CircularSuffixArray
 {
-    private char[] original;
     private Line[] lines;
-    int[] stringtoint;
+    private int[] stringtoint;
+    private int length;
     public CircularSuffixArray(String s)    // circular suffix array of s
     {
+        if (s == null)
+        {
+            throw new java.lang.IllegalArgumentException();
+        }
+        char[] original;
         original = s.toCharArray();
-        lines = new Line[original.length];
-        for (int j = 0; j < original.length; j++)
+        length = original.length;
+        lines = new Line[length];
+        stringtoint = new int[length];
+        for (int j = 0; j < length; j++)
         {
             stringtoint[j] = (int) original[j];
             lines[j] = new Line(j);
@@ -20,7 +24,7 @@ public class CircularSuffixArray
     }
     public int length()                     // length of s
     {
-        return original.length;
+        return length;
     }
     public int index(int i)                 // returns index of ith sorted suffix
     {
@@ -50,21 +54,21 @@ public class CircularSuffixArray
         {
             int currentcompare1;
             int currentcompare2;
-            if (o.index + layer < stringtoint.length)
+            if (o.index + layer < length)
             {
                 currentcompare1 = o.index + layer;
             }
             else
             {
-                currentcompare1 = o.index + layer - stringtoint.length;
+                currentcompare1 = o.index + layer - length;
             }
-            if (this.index + layer < stringtoint.length)
+            if (this.index + layer < length)
             {
                 currentcompare2 = this.index + layer;
             }
             else
             {
-                currentcompare2 = this.index + layer - stringtoint.length;
+                currentcompare2 = this.index + layer - length;
             }
             //====================================
             if (stringtoint[currentcompare1] > stringtoint[currentcompare2])
