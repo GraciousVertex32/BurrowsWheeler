@@ -14,6 +14,7 @@ public class CircularSuffixArray
         original = s.toCharArray();
         length = original.length;
         lines = new Line[length];
+
         stringtoint = new int[length];
         for (int j = 0; j < length; j++)
         {
